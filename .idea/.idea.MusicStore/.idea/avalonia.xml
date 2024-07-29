@@ -5,6 +5,7 @@
       <map>
         <entry key="MusicStore/App.axaml" value="MusicStore/MusicStore.csproj" />
         <entry key="MusicStore/Icons.axaml" value="MusicStore/MusicStore.csproj" />
+        <entry key="MusicStore/Views/AlbumView.axaml" value="MusicStore/MusicStore.csproj" />
         <entry key="MusicStore/Views/MainWindow.axaml" value="MusicStore/MusicStore.csproj" />
         <entry key="MusicStore/Views/MusicStoreView.axaml" value="MusicStore/MusicStore.csproj" />
         <entry key="MusicStore/Views/MusicStoreWindow.axaml" value="MusicStore/MusicStore.csproj" />

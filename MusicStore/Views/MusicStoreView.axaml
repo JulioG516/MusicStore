@@ -16,9 +16,16 @@
 
         <Button Content="Buy Album"
                 DockPanel.Dock="Bottom"
-                HorizontalAlignment="Center" />
+                HorizontalAlignment="Center"
+                Command="{Binding BuyMusicCommand}"/>
 
         <ListBox ItemsSource="{Binding SearchResults}"
-                 SelectedItem="{Binding SelectedAlbum}" />
+                 SelectedItem="{Binding SelectedAlbum}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </DockPanel>
 </UserControl>
