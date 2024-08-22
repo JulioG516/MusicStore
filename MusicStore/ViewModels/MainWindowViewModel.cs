@@ -2,12 +2,14 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using MusicStore.Models;
 using ReactiveUI;
 using System.Reactive.Concurrency;
+using Avalonia.Controls.ApplicationLifetimes;
 
 namespace MusicStore.ViewModels;
 
@@ -42,6 +44,8 @@ public class MainWindowViewModel : ViewModelBase
             Albums.Add(album);
         }
 
+    
+        
         foreach (var album in Albums.ToList())
         {
             await album.LoadCover();

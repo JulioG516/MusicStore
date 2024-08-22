@@ -13,6 +13,7 @@
                 <Panel Height="200" IsVisible="{Binding Cover, Converter={x:Static ObjectConverters.IsNull}}">
                     <PathIcon Height="75" Width="75" Data="{StaticResource MusicRegular}"></PathIcon>
                 </Panel>
+                <Button Command="{Binding Command}">Teste</Button>
             </Panel>
         </Border>
         <TextBlock HorizontalAlignment="Center" Text="{Binding Title}" />

@@ -1,4 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Avalonia.Media.Imaging;
 using MusicStore.Models;
 using ReactiveUI;
@@ -12,11 +16,24 @@ public class AlbumViewModel : ViewModelBase
     public AlbumViewModel(Album album)
     {
         _album = album;
+        Command = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var ex = new ArgumentException();
+
+            var recovery = await Interactions.Errors.Handle(ex);
+
+            if (recovery == ErrorRecoveryOption.Abort)
+            {
+                Debug.WriteLine("Abortou");
+            }
+        });
     }
 
     public string Artist => _album.Artist;
     public string Title => _album.Title;
 
+    public ICommand Command { get; }
+    
     private Bitmap? _cover;
 
     public Bitmap? Cover
