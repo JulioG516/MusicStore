@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -27,11 +28,21 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 {
                     Debug.WriteLine("passou");
-                    var x = await desktop.MainWindow.StorageProvider.OpenFolderPickerAsync(
-                        new FolderPickerOpenOptions());
-                    Debug.WriteLine(x);
-               
-                    
+
+                    var options =
+                        new FolderPickerOpenOptions()
+                        {
+                            AllowMultiple = false,
+                            Title = "Select the folder location."
+                        };
+
+                    var folders = await desktop.MainWindow.StorageProvider.OpenFolderPickerAsync(options);
+                    Debug.WriteLine(folders.Any());
+                    if (folders.Any())
+                    {
+                        Debug.WriteLine(folders.First().Path);
+                    }
+
                     interaction.SetOutput(ErrorRecoveryOption.Abort);
                 }
                 else
