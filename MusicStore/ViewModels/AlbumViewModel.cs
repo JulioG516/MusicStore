@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -20,12 +22,23 @@ public class AlbumViewModel : ViewModelBase
         {
             var ex = new ArgumentException();
 
-            var recovery = await Interactions.Errors.Handle(ex);
+            
+            
+            // var recovery = await Interactions.Errors.Handle(ex);
+            var recovery = await Interactions.GetFolder.Handle(Unit.Default);
 
-            if (recovery == ErrorRecoveryOption.Abort)
+            if (!string.IsNullOrEmpty(recovery))
             {
-                Debug.WriteLine("Abortou");
+                Debug.WriteLine($"Retornou - {recovery}");
+
+                var path = new FileSystemWatcher(recovery);
+       
             }
+            else
+            {
+                Debug.WriteLine("Não selecionou nada.");
+            }
+
         });
     }
 

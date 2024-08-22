@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
@@ -22,10 +23,10 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         this.WhenActivated(action =>
             action(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
 
-        Interactions.Errors.RegisterHandler(
+        Interactions.GetFolder.RegisterHandler(
             async interaction =>
             {
-                if (Avalonia.Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
                 {
                     Debug.WriteLine("passou");
 
@@ -43,7 +44,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                         Debug.WriteLine(folders.First().Path);
                     }
 
-                    interaction.SetOutput(ErrorRecoveryOption.Abort);
+                    interaction.SetOutput(folders.Any() ? folders.First().Path.PathAndQuery : null);
                 }
                 else
                 {
